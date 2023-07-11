@@ -10,6 +10,7 @@ const hours = document.querySelector('span[data-hours]');
 const days = document.querySelector('span[data-days]');
 
 start.disabled = true;
+let timerId = null;
 
 const options = {
   enableTime: true,
@@ -17,11 +18,13 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
     onClose(selectedDates) {
-      if (selectedDates[0] < new Date) {
-        alert("Please choose a date in the future")
+      if (selectedDates[0] < new Date()) {
+          alert("Please choose a date in the future");
+          return;
         }
         start.disabled = false;
-    console.log(selectedDates[0]);
+        console.log(selectedDates[0]);
+        
   },
 };
 
@@ -57,15 +60,17 @@ function addLeadingZero(value){
 
 start.addEventListener('click', () => {
     timerId = setInterval(() => {
-        let timer = new Date(text.value) - new Date;
-        //console.log(timer);
-         let timeObject = convertMs(timer);
 
-     
-      days.textContent = addLeadingZero(timeObject.days);
-      hours.textContent = addLeadingZero(timeObject.hours);
-      minutes.textContent = addLeadingZero(timeObject.minutes);
-      seconds.textContent = addLeadingZero(timeObject.seconds);
+        let timer = new Date(text.value) - new Date();
+       
+        let timeObject = convertMs(timer);
 
-  }, 1000);
-})
+        if (timer > 0){
+            days.textContent = addLeadingZero(timeObject.days);
+            hours.textContent = addLeadingZero(timeObject.hours);
+            minutes.textContent = addLeadingZero(timeObject.minutes);
+            seconds.textContent = addLeadingZero(timeObject.seconds);
+        }
+        
+    }, 1000);
+});
