@@ -7,7 +7,7 @@ function getRandomHexColor() {
 const start = document.querySelector('[data-start]');
 const stop = document.querySelector('[data-stop]');
 const body = document.querySelector('body');
-
+let timerId = null;
 
 
 start.addEventListener("click", () => {
