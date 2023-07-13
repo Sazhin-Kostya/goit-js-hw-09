@@ -15,10 +15,12 @@ start.addEventListener("click", () => {
     body.style.backgroundColor = getRandomHexColor();
   }, 1000);
     start.disabled = true;
+    stop.disabled = false;
 });
 
 stop.addEventListener("click", () => {
     clearInterval(timerId);
     start.disabled = false;
+  stop.disabled = true;
 });
 
